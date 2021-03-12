@@ -10,22 +10,21 @@ public class Programa {
 
 	public static void main(String[] args) {
 
-		Pessoa p1 = new Pessoa(null,"Carlos da Silva","carlos@gmail.com");
-		Pessoa p2 = new Pessoa(null,"Carlos da Silva","carlos@gmail.com");
+		Pessoa p1 = new Pessoa(null,"André da Silva","andre@gmail.com");
+		Pessoa p2 = new Pessoa(null,"Barbara da Silva","barbara@gmail.com");
 		Pessoa p3 = new Pessoa(null,"Carlos da Silva","carlos@gmail.com");
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
-		
-		em.getTransaction().begin();//Como não é uma simples leitura do BD é necessário uma transação com o banco.
-		
-		em.persist(p1);
-		em.persist(p2);
-		em.persist(p3);
-		em.getTransaction().commit();//Esse trecho é necessário para confirmar a gravação no Banco.
+
+		Pessoa p = em.find(Pessoa.class, 2);//Buscará no Banco de dados a pessoa numero 02
 		
 		System.out.println("Tudo pronto!");
-
+		
+		System.out.println(p);
+		em.close();
+		emf.close();
+		
 	}
 
 }
