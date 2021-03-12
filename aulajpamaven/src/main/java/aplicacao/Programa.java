@@ -18,6 +18,10 @@ public class Programa {
 		EntityManager em = emf.createEntityManager();
 
 		Pessoa p = em.find(Pessoa.class, 2);//Buscará no Banco de dados a pessoa numero 02
+		em.getTransaction().begin();
+		em.remove(p);// Excluirá a pessoa que buscamos acima
+		em.getTransaction().commit();
+		
 		
 		System.out.println("Tudo pronto!");
 		
